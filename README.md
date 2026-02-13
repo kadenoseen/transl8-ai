@@ -4,7 +4,7 @@ AI-powered CLI for managing i18n JSON translation files using OpenAI.
 
 Analyze, translate, sync, and maintain your app's translation files from the command line.
 
-![Demo](demo/demo.gif)
+![Demo](https://raw.githubusercontent.com/kadenoseen/transl8-ai/main/demo/demo.gif)
 
 ## Quick Start
 
