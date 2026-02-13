@@ -1,0 +1,92 @@
+{
+  "common": {
+    "appName": "MyApp",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "search": "Search",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "close": "Close",
+    "retry": "Retry",
+    "submit": "Submit"
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "orContinueWith": "Or continue with"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}!",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity to show.",
+    "viewAll": "View all",
+    "statsTitle": "Your Stats",
+    "totalProjects": "Total Projects",
+    "completedTasks": "Completed Tasks",
+    "activeMembers": "Active Members"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "You're all caught up!",
+    "newMessage": "You have a new message from {sender}.",
+    "itemShipped": "Your order #{orderId} has been shipped.",
+    "paymentReceived": "Payment of {amount} received successfully.",
+    "accountVerified": "Your account has been verified.",
+    "weeklyDigest": "Here's your weekly activity summary."
+  },
+  "onboarding": {
+    "step1Title": "Create your account",
+    "step1Description": "Sign up in seconds and start exploring.",
+    "step2Title": "Set your preferences",
+    "step2Description": "Choose the topics and features that matter to you.",
+    "step3Title": "You're all set!",
+    "step3Description": "Start using MyApp to boost your productivity.",
+    "skipTour": "Skip tour",
+    "takeTour": "Take a quick tour"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "account": "Account",
+    "appearance": "Appearance",
+    "darkMode": "Dark mode",
+    "language": "Language",
+    "notifications": "Notification preferences",
+    "privacy": "Privacy & Security",
+    "changePassword": "Change password",
+    "twoFactor": "Enable two-factor authentication",
+    "deleteAccount": "Delete my account",
+    "deleteWarning": "This action cannot be undone. All your data will be permanently removed."
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "serverError": "Something went wrong. Please try again later.",
+    "networkError": "Unable to connect. Check your internet connection.",
+    "unauthorized": "You need to log in to access this page.",
+    "forbidden": "You don't have permission to view this content.",
+    "timeout": "The request timed out. Please try again.",
+    "rateLimited": "Too many requests. Please wait a moment."
+  },
+  "billing": {
+    "currentPlan": "Current Plan",
+    "upgrade": "Upgrade",
+    "downgrade": "Downgrade",
+    "cancelSubscription": "Cancel subscription",
+    "paymentMethod": "Payment Method",
+    "invoiceHistory": "Invoice History",
+    "nextBillingDate": "Next billing date: {date}",
+    "trialEnds": "Your free trial ends in {days} days."
+  }
+}

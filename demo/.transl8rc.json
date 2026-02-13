@@ -1,0 +1,11 @@
+{
+  "messagesDir": "./messages",
+  "sourceLanguage": "en",
+  "model": "gpt-5.2",
+  "concurrency": 50,
+  "glossaryPath": "./glossary.json",
+  "linkedContentPatterns": [],
+  "hrefPatterns": [
+    "*.href"
+  ]
+}

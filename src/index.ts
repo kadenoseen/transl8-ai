@@ -12,7 +12,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 // Load .env from cwd
-config({ path: path.resolve(process.cwd(), ".env") });
+config({ path: path.resolve(process.cwd(), ".env"), quiet: true });
 
 import {
   analyzeAllFiles,
@@ -39,6 +39,7 @@ import {
   setValueAtPath,
   deepClone,
   colorize,
+  printBanner,
   printHeader,
   printSection,
   setMessagesDir,
@@ -61,6 +62,11 @@ import {
   createDefaultConfig,
   createDefaultGlossary,
 } from "./config.js";
+
+/** Display a file path relative to cwd */
+function relPath(filePath: string): string {
+  return path.relative(process.cwd(), filePath);
+}
 
 const program = new Command();
 
@@ -266,7 +272,7 @@ program
 
       if (!fs.existsSync(targetFile)) {
         console.error(
-          colorize(`Error: Translation file not found: ${targetFile}`, "red"),
+          colorize(`Error: Translation file not found: ${relPath(targetFile)}`, "red"),
         );
         process.exit(1);
       }
@@ -334,7 +340,7 @@ program
       if (fs.existsSync(targetFile) && !options.force) {
         console.error(
           colorize(
-            `Error: Translation file already exists: ${targetFile}`,
+            `Error: Translation file already exists: ${relPath(targetFile)}`,
             "red",
           ),
         );
@@ -355,7 +361,7 @@ program
           path.join(messagesDir, "en.json"),
         );
         const keyCount = flattenKeys(sourceFile).length;
-        console.log(`Would create: ${targetFile}`);
+        console.log(`Would create: ${relPath(targetFile)}`);
         console.log(`Total keys to translate: ${keyCount}`);
         return;
       }
@@ -388,7 +394,7 @@ program
       );
 
       console.log(
-        colorize(`\n✓ Created translation file: ${targetFile}`, "green"),
+        colorize(`\n✓ Created translation file: ${relPath(targetFile)}`, "green"),
       );
     } catch (error) {
       console.error(
@@ -425,7 +431,7 @@ program
 
       if (!fs.existsSync(targetFile)) {
         console.error(
-          colorize(`Error: Translation file not found: ${targetFile}`, "red"),
+          colorize(`Error: Translation file not found: ${relPath(targetFile)}`, "red"),
         );
         console.error(
           `Use "transl8 create ${language}" to create a new translation file.`,
@@ -506,7 +512,7 @@ program
 
       console.log(
         colorize(
-          `\n✓ Updated ${results.length} translations in ${targetFile}`,
+          `\n✓ Updated ${results.length} translations in ${relPath(targetFile)}`,
           "green",
         ),
       );
@@ -547,7 +553,7 @@ program
       // Create file if it doesn't exist
       if (!fs.existsSync(targetFile)) {
         console.log(
-          colorize(`Creating new translation file: ${targetFile}`, "cyan"),
+          colorize(`Creating new translation file: ${relPath(targetFile)}`, "cyan"),
         );
         if (!options.dryRun) {
           saveTranslationFile(targetFile, {});
@@ -657,7 +663,7 @@ program
         targetFile,
         reorderToMatchSource(source, updatedTarget),
       );
-      console.log(colorize(`\nSaved: ${targetFile}`, "green"));
+      console.log(colorize(`\nSaved: ${relPath(targetFile)}`, "green"));
     } catch (error) {
       console.error(
         colorize(
@@ -694,7 +700,7 @@ program
 
       if (!fs.existsSync(targetFile)) {
         console.error(
-          colorize(`Error: Translation file not found: ${targetFile}`, "red"),
+          colorize(`Error: Translation file not found: ${relPath(targetFile)}`, "red"),
         );
         process.exit(1);
       }
@@ -758,7 +764,7 @@ program
       );
       console.log(
         colorize(
-          `\n✓ Removed ${report.extraInTarget.length} extra keys from ${targetFile}`,
+          `\n✓ Removed ${report.extraInTarget.length} extra keys from ${relPath(targetFile)}`,
           "green",
         ),
       );
@@ -831,7 +837,7 @@ program
 
       if (!fs.existsSync(targetFile)) {
         console.error(
-          colorize(`Error: Translation file not found: ${targetFile}`, "red"),
+          colorize(`Error: Translation file not found: ${relPath(targetFile)}`, "red"),
         );
         process.exit(1);
       }
@@ -900,7 +906,7 @@ program
         reorderToMatchSource(source, updatedTarget),
       );
       console.log(
-        colorize(`\n✓ Fixed ${fixedCount} values in ${targetFile}`, "green"),
+        colorize(`\n✓ Fixed ${fixedCount} values in ${relPath(targetFile)}`, "green"),
       );
     } catch (error) {
       console.error(
@@ -1207,6 +1213,11 @@ glossaryCmd
       process.exit(1);
     }
   });
+
+// Show banner when running interactively with a command
+if (process.stdout.isTTY && process.argv.length > 2) {
+  printBanner();
+}
 
 // Parse and run
 program.parse(process.argv);

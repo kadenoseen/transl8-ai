@@ -2,3 +2,5 @@ node_modules/
 dist/
 *.log
 .env
+demo/.env
+demo/demo.gif

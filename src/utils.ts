@@ -442,20 +442,126 @@ export function colorize(text: string, color: keyof typeof colors): string {
 }
 
 /**
- * Print a formatted header
+ * Print the CLI banner with multi-color ASCII art.
+ * Only shown when stdout is a TTY (not piped).
+ */
+export function printBanner(): void {
+  if (!process.stdout.isTTY) return;
+
+  const cyan = colors.cyan;
+  const magenta = colors.magenta;
+  const blue = colors.blue;
+  const dim = colors.dim;
+  const reset = colors.reset;
+
+  // prettier-ignore
+  const lines = [
+    `${cyan}  _                        _  ${magenta}___${reset}`,
+    `${cyan} | |_ _ __ __ _ _ __  ___| |${magenta}( _ )${blue}    __ _(_)${reset}`,
+    `${cyan} | __| '__/ _\` | '_ \\/ __| |${magenta}/ _ \\${blue}   / _\` | |${reset}`,
+    `${cyan} | |_| | | (_| | | | \\__ \\ |${magenta} (_) |${blue} | (_| | |${reset}`,
+    `${cyan}  \\__|_|  \\__,_|_| |_|___/_|${magenta}\\___/${blue}   \\__,_|_|${reset}`,
+  ];
+
+  console.log("");
+  for (const line of lines) {
+    console.log(line);
+  }
+  console.log(`${dim}  AI-powered i18n translation CLI${reset}`);
+  console.log("");
+}
+
+/**
+ * Print a formatted header with box-drawing characters
  */
 export function printHeader(text: string): void {
-  console.log("\n" + colorize("═".repeat(60), "cyan"));
-  console.log(colorize(`  ${text}`, "bold"));
-  console.log(colorize("═".repeat(60), "cyan"));
+  const width = Math.max(text.length + 4, 40);
+  const inner = width - 2;
+  console.log("");
+  console.log(colorize(`┌${"─".repeat(inner)}┐`, "cyan"));
+  console.log(
+    colorize("│", "cyan") +
+      colorize(` ${text}`, "bold") +
+      " ".repeat(inner - text.length - 1) +
+      colorize("│", "cyan"),
+  );
+  console.log(colorize(`└${"─".repeat(inner)}┘`, "cyan"));
 }
 
 /**
  * Print a formatted section
  */
 export function printSection(text: string): void {
-  console.log("\n" + colorize(`▸ ${text}`, "yellow"));
+  console.log(
+    "\n" + colorize("●", "yellow") + " " + colorize(text, "bold"),
+  );
   console.log(colorize("─".repeat(40), "dim"));
+}
+
+/**
+ * Print a success message
+ */
+export function printSuccess(text: string): void {
+  console.log(colorize(`  ✓ ${text}`, "green"));
+}
+
+/**
+ * Print a warning message
+ */
+export function printWarning(text: string): void {
+  console.log(colorize(`  ⚠ ${text}`, "yellow"));
+}
+
+/**
+ * Print an error message
+ */
+export function printError(text: string): void {
+  console.log(colorize(`  ✗ ${text}`, "red"));
+}
+
+/**
+ * Create a braille spinner for async operations.
+ * Returns an object with `update(text)` and `stop(text?)` methods.
+ * Uses ANSI cursor control — only works on TTY.
+ */
+export function createSpinner(initialText: string): {
+  update: (text: string) => void;
+  stop: (finalText?: string) => void;
+} {
+  const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  let i = 0;
+  let text = initialText;
+  const isTTY = process.stdout.isTTY;
+
+  if (!isTTY) {
+    // Non-TTY: just print the text once
+    process.stdout.write(`  ${text}\n`);
+    return {
+      update: () => {},
+      stop: (finalText?: string) => {
+        if (finalText) process.stdout.write(`  ${finalText}\n`);
+      },
+    };
+  }
+
+  const timer = setInterval(() => {
+    const frame = colorize(frames[i % frames.length], "cyan");
+    process.stdout.write(`\r  ${frame} ${text}`);
+    i++;
+  }, 80);
+
+  return {
+    update(newText: string) {
+      text = newText;
+    },
+    stop(finalText?: string) {
+      clearInterval(timer);
+      process.stdout.write("\r" + " ".repeat(text.length + 10) + "\r");
+      if (finalText) {
+        console.log(`  ${colorize("✓", "green")} ${finalText}`);
+      }
+    },
+  };
 }
 
 /**

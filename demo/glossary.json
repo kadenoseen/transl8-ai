@@ -1,0 +1,10 @@
+{
+  "protectedTerms": [
+    {
+      "term": "MyApp",
+      "description": "Product name, keep unchanged in all languages",
+      "caseSensitive": true,
+      "translations": {}
+    }
+  ]
+}
