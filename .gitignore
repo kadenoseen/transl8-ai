@@ -3,4 +3,3 @@ dist/
 *.log
 .env
 demo/.env
-demo/demo.gif
