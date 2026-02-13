@@ -1,0 +1,45 @@
+{
+  "name": "transl8-ai",
+  "version": "1.0.0",
+  "description": "AI-powered CLI for managing i18n JSON translation files using OpenAI",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "transl8": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "i18n",
+    "translation",
+    "localization",
+    "openai",
+    "gpt",
+    "cli",
+    "json",
+    "internationalization",
+    "l10n",
+    "translate"
+  ],
+  "author": "kadenoseen",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^17.2.3",
+    "openai": "^5.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.26",
+    "typescript": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
