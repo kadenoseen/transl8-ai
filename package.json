@@ -28,6 +28,14 @@
     "l10n",
     "translate"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadenoseen/transl8-ai.git"
+  },
+  "homepage": "https://github.com/kadenoseen/transl8-ai",
+  "bugs": {
+    "url": "https://github.com/kadenoseen/transl8-ai/issues"
+  },
   "author": "kadenoseen",
   "license": "MIT",
   "dependencies": {

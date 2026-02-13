@@ -1,5 +1,10 @@
 # transl8-ai
 
+[![npm version](https://img.shields.io/npm/v/transl8-ai.svg)](https://www.npmjs.com/package/transl8-ai)
+[![license](https://img.shields.io/npm/l/transl8-ai.svg)](https://github.com/kadenoseen/transl8-ai/blob/main/LICENSE)
+[![node](https://img.shields.io/node/v/transl8-ai.svg)](https://www.npmjs.com/package/transl8-ai)
+[![npm downloads](https://img.shields.io/npm/dm/transl8-ai.svg)](https://www.npmjs.com/package/transl8-ai)
+
 AI-powered CLI for managing i18n JSON translation files using OpenAI.
 
 Analyze, translate, sync, and maintain your app's translation files from the command line.
